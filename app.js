@@ -10,7 +10,6 @@ form.addEventListener('submit', (e) => {
   getGif(q);
 });
 removeBtn.addEventListener('click', (e) => {
-  console.log(`i click i click`);
   gifBox.replaceChildren();
 });
 
@@ -19,13 +18,12 @@ async function getGif(q) {
     const res = await axios.get(`https://api.giphy.com/v1/gifs/search`, {
       params: { q, api_key },
     });
+    const rand = Math.floor(Math.random() * 50);
+    const gif = document.createElement('img');
+    gif.className = 'gifs';
+    gif.src = res.data.data[Math.floor(Math.random() * 50)].images.original.url;
+    gifBox.append(gif);
   } catch (error) {
     console.log(error);
   }
-
-  const rand = Math.floor(Math.random() * 50);
-  const gif = document.createElement('img');
-  gif.className = 'gifs';
-  gif.src = res.data.data[Math.floor(Math.random() * 50)].images.original.url;
-  gifBox.append(gif);
 }
