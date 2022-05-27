@@ -15,9 +15,13 @@ removeBtn.addEventListener('click', (e) => {
 });
 
 async function getGif(q) {
-  const res = await axios.get(`http://api.giphy.com/v1/gifs/search`, {
-    params: { q, api_key },
-  });
+  try {
+    const res = await axios.get(`https://api.giphy.com/v1/gifs/search`, {
+      params: { q, api_key },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 
   const rand = Math.floor(Math.random() * 50);
   const gif = document.createElement('img');
